@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
 const cdk = require('@aws-cdk/core');
-const { TelegramBotStack } = require('../lib/telegram-bot-stack');
+const { CdkToolStack } = require('../lib/cdk-tool-stack');
 
 const app = new cdk.App();
-new TelegramBotStack(app, 'TelegramBotStack', {
+new CdkToolStack(app, 'CdkToolStack', {
   /* If you don't specify 'env', this stack will be environment-agnostic.
    * Account/Region-dependent features and context lookups will not work,
    * but a single synthesized template can be deployed anywhere. */

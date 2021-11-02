@@ -1,5 +1,5 @@
 {
-  "app": "node bin/telegram-bot.js",
+  "app": "node bin/cdk-tool.js",
   "context": {
     "@aws-cdk/aws-apigateway:usagePlanKeyOrderInsensitiveId": true,
     "@aws-cdk/core:enableStackNameDuplicates": true,

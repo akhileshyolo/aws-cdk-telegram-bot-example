@@ -1,8 +1,8 @@
 {
-  "name": "telegram-bot",
+  "name": "cdk-tool",
   "version": "0.1.0",
   "bin": {
-    "telegram-bot": "bin/telegram-bot.js"
+    "cdk-tool": "bin/cdk-tool.js"
   },
   "scripts": {
     "build": "echo \"The build step is not required when using JavaScript!\" && exit 0",
@@ -17,8 +17,6 @@
   "dependencies": {
     "@aws-cdk/aws-apigateway": "^1.130.0",
     "@aws-cdk/aws-lambda": "^1.130.0",
-    "@aws-cdk/aws-logs": "^1.130.0",
-    "@aws-cdk/aws-s3": "^1.130.0",
     "@aws-cdk/core": "1.130.0"
   }
 }
