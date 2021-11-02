@@ -16,26 +16,31 @@ class TelegramBotStack extends cdk.Stack {
     const lambdaTelegram = new lambda.Function(this, "telegramBotHandler", {
       runtime: lambda.Runtime.NODEJS_14_X,
       handler: "index.handler",
-      architecture: lambda.Architecture.ARM_64,
       code: lambda.Code.fromAsset("assets/lambda/telegram-bot"),
+      architecture: lambda.Architecture.ARM_64,
+      environment: {
+        'CURRENT_ENV': 'dev',
+      }
     });
 
-    // defines an API Gateway REST API resource backed by our "hello" function.
-    const restApi = new apigw.RestApi(this, "telegrambot-api", {
-      deploy: false,
-    });
+    // All constructs take these same three arguments : scope, id/name, props
+    // defines an API Gateway REST API resource backed by our "telegrambot-api" function.
+    const restApi = new apigw.RestApi(this, "telegrambot-api", { deploy: false });
+
     const method = restApi.root
       .addResource("bot")
       .addMethod("GET", new apigw.LambdaIntegration(lambdaTelegram, { proxy: true }));
 
-    // development stage
-    const devDeploy = new apigw.Deployment(this, "dev-deployment", {
-      api: restApi,
-    });
+    // All constructs take these same three arguments : scope, id/name, props
+    const devDeploy = new apigw.Deployment(this, "dev-deployment", { api: restApi });
+
+    // All constructs take these same three arguments : scope, id/name, props
     new apigw.Stage(this, "devStage", {
       deployment: devDeploy,
-      stageName: 'dev'
+      stageName: 'dev' // If not passed, by default it will be 'prod'
     });
+
+    // All constructs take these same three arguments : scope, id/name, props
     new cdk.CfnOutput(this, "BotURL", {
       value: `https://${restApi.restApiId}.execute-api.${this.region}.amazonaws.com/beta/bot`,
     });
